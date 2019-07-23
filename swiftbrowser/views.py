@@ -39,8 +39,10 @@ def login(request):
             request.session['username'] = username
             return redirect(containerview)
 
-        except client.ClientException:
-            messages.add_message(request, messages.ERROR, _("Login failed."))
+        # except client.ClientException:
+            # messages.add_message(request, messages.ERROR, _("Login failed."))
+        except Exception as e:
+             messages.add_message(request, messages.ERROR, _(e.msg))
 
     return render(request, 'login.html', {'form': form, })
 
